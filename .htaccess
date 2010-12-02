@@ -1,3 +1,6 @@
+DirectoryIndex index.html
+AddType text/cache-manifest manifest
+
 RewriteEngine On
 
 RewriteRule ^custom-(.*)      custom_view.php?f=$1  [L]
