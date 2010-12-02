@@ -1,0 +1,7 @@
+ol#qunit-tests li.fail .fail {
+	font-size: 120%;
+}
+.fail .fail {
+	white-space: pre;
+	font-family: monospace;
+}

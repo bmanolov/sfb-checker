@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html manifest="offline.manifest">
+<head>
+	<meta charset="utf-8">
+	<title>Проверител на SFB за грешки</title>
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="icon" href="/favicon.png" type="image/png">
+</head>
+
+<body>
+<hgroup>
+	<h1>Проверител на SFB за грешки</h1>
+	<h2>или опит за двойник на макроса на Mandor в браузър</h2>
+</hgroup>
+
+<fieldset id="input-box">
+	<ul>
+		<li>
+			<dl>
+				<dt><label for="input">SFB:</label></dt>
+				<dd>
+					<textarea id="input" class="input" tabindex="1"></textarea>
+					<form id="file-input" onsubmit="Editor.loadLocalFile(this.localfile.files); return false">
+						<input id="localfile" name="localfile" type="file" onchange="Editor.loadLocalFile(this.files)" tabindex="3">
+						<button type="submit">Зареждане</button>
+					</form>
+				</dd>
+			</dl>
+		</li>
+		<li>
+			<dl>
+				<dt><label for="incorrect">Често срещани некоректни думи:</label></dt>
+				<dd><textarea id="incorrect" class="input" tabindex="4">ие,йе,иа,йа,ог,ое,ее,сс,па,ио,йо,пе,ше,сн,нешо,нишо,зашо,току що,конто,понита,горе долу,долу горе,насам натам,(един|една|едно) един[а-я]+</textarea>
+				<!--
+				във [^вфВФ][а-я]+,със [^сзСЗ][а-я]+
+				-->
+				</dd>
+			</dl>
+		</li>
+		<li>
+			<div id="action-buttons">
+				<fieldset id="replace-box" class="collapsible">
+					<legend>Замяна на знаци</legend>
+					<div>
+					<button onclick="Editor.replace('dashes', this)" title="Оправяне на тирета, изтриване на тирета за пренос">Тирета</button>
+					<button onclick="Editor.replace('quotes', this)" title="Оправяне на кавички — само френски">Кавички</button>
+					<button onclick="Editor.replace('spaces', this)" title="Премахване на водещи, опашни и двойни интервали">Интервали</button>
+					<button onclick="Editor.replace('misc', this)" title="Оправяне на многоточия, апострофи">Разни</button>
+					<button onclick="Editor.replace('tabs', this)">Вмъкване на табулации</button>
+					</div>
+				</fieldset>
+				<fieldset>
+					<button id="hilite-button" onclick="hilite()" tabindex="2">Засветване</button>
+					<button id="save-remote-button" onclick="RemoteFile.save(this)">Запис на сървъра</button>
+				</fieldset>
+			</div>
+		</li>
+	</ul>
+</fieldset>
+
+<div id="help">
+	<h2>Тънкости</h2>
+	<ul>
+		<li>Зареждането на файл работи във Файърфокс 3.6. Поддържа се дори и чрез влачене и пускане в прозореца на браузъра. <em>Задължително е файловете да са в кодиране UTF-8.</em></li>
+		<li>За придвижване между маркировките могат да се ползват и стрелките: лява — назад, дясна — напред. В режим „редактиране“ те се изключват, а на тяхно място идват клавишите Page Up и Page Down.</li>
+		<li>Горе вляво се показва съдържанието на текущата маркировка. При минаване с мишката могат да се видят и номерата на съответните знаци.</li>
+		<li>Функциите от менюто „Замяна на знаци“ работят с текста от основната кутия (SFB).</li>
+	</ul>
+</div>
+
+<footer>
+	<p>Картинката е взета от <a href="http://commons.wikimedia.org/wiki/File:SgtPat1.svg">http://commons.wikimedia.org/wiki/File:SgtPat1.svg</a>.</p>
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.hotkeys.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script src="js/jquery.simpletip.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

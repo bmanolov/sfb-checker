@@ -1,0 +1,331 @@
+header, footer, aside, nav, article {
+	display: block;
+}
+body {
+	background: white url(images/sgtpat1.png) no-repeat 98% top;
+}
+pre {
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+}
+fieldset {
+	border: none;
+}
+table {
+	border-collapse: collapse;
+}
+th, td {
+	border: thin solid #a0a0a0;
+}
+th {
+	padding-top: .2em;
+	padding-bottom: .2em;
+}
+td {
+	padding: .1em .4em;
+}
+caption {
+	margin: 1em auto 0 auto;
+	font-weight: bold;
+}
+footer {
+	margin-top: 3em;
+	border-top: thin solid silver;
+	font-size: 90%;
+	font-style: italic;
+}
+h1, h2, h3 {
+	font-weight: normal;
+}
+input:focus, textarea:focus {
+	color: black;
+	background-color: lightyellow;
+}
+button {
+	padding: 0.1em 0.5em;
+	border: .2ex outset #ffffff;
+	-moz-border-radius: .6em;
+	border-radius: .6em;
+	color: #000000;
+	background-color: #e0e0e0;
+	background-image: -moz-linear-gradient(top, #ffffff, #c0c0c0);
+}
+button:focus, button:hover {
+	background-image: -moz-linear-gradient(top, #ffffff, #e0e0e0);
+}
+button:active {
+	border-style: inset;
+}
+button[disabled] {
+	color: #808080;
+	background: #e0e0e0;
+	border-style: solid;
+}
+button[disabled]:active {
+	border-style: solid;
+}
+button.delete {
+	margin-left: 2em;
+	padding: 0.1em;
+}
+button.delete span {
+	padding-left: 1.5em;
+	background: url(images/delete.png) no-repeat left center;
+}
+
+#input-box {
+	text-align: center;
+}
+#input-box ul {
+	padding: 0;
+}
+#input-box li {
+	list-style-type: none;
+}
+#input-box dd {
+	margin: 0;
+}
+.input {
+	width: 100%;
+	border: thin inset #069;
+}
+#input {
+	height: 10em;
+}
+#replace-box {
+	border: thin solid silver;
+}
+#incorrect {
+	height: 2em;
+}
+#output {
+	margin-bottom: 50%;
+	padding: 1em 1em 1em 2em;
+	border: medium solid #09C;
+	border-radius: 1em;
+	-moz-border-radius: 1em;
+}
+#navi {
+	margin: 0 auto;
+	padding: .2em 0;
+	width: 30%;
+	border: medium solid #0CF;
+	border-radius: 1em;
+	-moz-border-radius: 1em;
+	color: black;
+	background-color: white;
+	text-align: center;
+}
+#navi ul {
+	padding: 0;
+	margin: 0.2em 0;
+}
+#navi li {
+	display: inline;
+	list-style-type: none;
+}
+.navi-top {
+	position: fixed;
+	top: .3em;
+	left: 35%;
+}
+#current-mark {
+	font-weight: bold;
+}
+#current-mark-text {
+	display: none;
+	position: fixed;
+	top: .3em;
+	left: 1em;
+	font-weight: bold;
+	font-size: 1.5em;
+	text-decoration: underline;
+	white-space: pre;
+}
+#current-mark-text, .tooltip {
+	padding: .2em .5em;
+	border: medium solid #069;
+	border-radius: .6em;
+	-moz-border-radius: .6em;
+	color: black;
+	background-color: #f9f9f9;
+}
+.tooltip {
+	position: absolute;
+	z-index: 3;
+}
+#current-mark-raw {
+	position: absolute;
+	top: 1.8em;
+	left: 1em;
+	padding: .2em .5em;
+	border-radius: .6em;
+	-moz-border-radius: .6em;
+	color: white;
+	background-color: #036;
+	font-weight: normal;
+	font-size: 80%;
+	text-decoration: none;
+}
+.current {
+	border-bottom: medium solid black;
+}
+#edit-buttons {
+	float: right;
+}
+#file-input {
+	float: right;
+}
+form.working {
+	background: white url(images/indicator.gif) left center no-repeat;
+	padding-left: 2em;
+}
+button.working {
+	background: #e0e0e0 url(images/indicator.gif) right center no-repeat;
+}
+button.done {
+	padding-left: 1.1em;
+	background: #e0e0e0 url(images/ok.png) 5% center no-repeat;
+}
+
+mark {
+	color: black;
+	background-color: #4FFFEB;
+	white-space: pre-wrap;
+}
+mark.latin {
+	color: black;
+	background-color: yellow !important;
+}
+cite:hover {
+	color: black;
+	background-color: #FFEEBF;
+}
+cite cite:hover {
+	color: black;
+	background-color: #FFB900;
+}
+cite cite cite:hover {
+	color: black;
+	background-color: #FF8A00;
+}
+cite cite cite cite:hover {
+	color: white;
+	background-color: #CF4900;
+}
+#mark-index {
+	max-width: 100%;
+}
+#mark-index td > mark {
+	font-family: monospace;
+}
+#mark-index ul {
+	padding: 0;
+	margin: 0.2em 0;
+}
+#mark-index li {
+	display: inline;
+	list-style-type: none;
+	line-height: 1.5em;
+}
+#mark-index li:after {
+	content: " ";
+}
+#mark-index a {
+	padding: .1em .2em .05em;
+	border: thin solid #C3D6DF;
+	-moz-border-radius: .3em;
+	border-radius: .3em;
+	text-decoration: none;
+	color: #069;
+	background-color: white;
+}
+#mark-index a:hover {
+	color: white;
+	background-color: #069;
+}
+.index-marks {
+	max-width: 40em;
+}
+.marker {
+	color: #c0c0c0;
+}
+.title {
+	font-weight: bold;
+	font-size: 120%;
+}
+.section {
+	font-weight: bold;
+	font-size: 110%;
+}
+.sign {
+	font-weight: bold;
+}
+.poem,
+.dedication,
+.info {
+	font-style: italic;
+}
+.image {
+	color: grey;
+}
+.inmarker {
+	color: grey;
+}
+.author {
+	color: grey;
+}
+.tab {
+	background-color: #f6f6f6;
+}
+
+
+/* обикновено за редове на таблици */
+.odd {
+	color: black;
+	background-color: #f0f0f0;
+}
+
+/* сортуруеми таблици */
+th.header {
+	padding-left: 1.1em;
+	background-image: url(images/sprite-sort.png);
+	background-repeat: no-repeat;
+	background-position: 4px -112px;
+	cursor: pointer;
+}
+th.headerSortUp {
+	background-position: 5px -24px;
+	text-decoration: underline;
+}
+th.headerSortDown {
+	background-position: 5px -68px;
+	text-decoration: underline;
+}
+
+
+.collapsible legend {
+	background: url(images/sprite-arrow.png) no-repeat 0 -66px;
+	padding-left: 1.2em;
+}
+.collapsible legend:hover {
+	background-position: 0 0;
+	color: #069;
+	cursor: pointer;
+}
+.collapsed legend {
+	background-position: 0 -198px;
+}
+.collapsed legend:hover {
+	background-position: 0 -132px;
+}
+.collapsed {
+	padding-top: 0;
+	padding-bottom: 0;
+	border: none !important;
+}
+
+pre[contenteditable=true] {
+	background-image: -moz-linear-gradient(left, #FFC47F, white 2em, white);
+}

@@ -1,0 +1,19 @@
+CACHE MANIFEST
+# v6
+index.html
+css/main.css
+css/images/delete.png
+css/images/indicator.gif
+css/images/ok.png
+css/images/sgtpat1.png
+css/images/sprite-sort.png
+css/images/sprite-arrow.png
+js/jquery.min.js
+js/jquery.hotkeys.min.js
+js/jquery.simpletip.min.js
+js/jquery.tablesorter.min.js
+js/hilite_worker.js
+js/main.js
+js/replacer.js
+js/replace_worker.js
+js/sfb_master.js
