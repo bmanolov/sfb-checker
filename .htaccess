@@ -1,5 +1,5 @@
 RewriteEngine On
 
-RewriteRule ^custom-(.*)      /sfb-check/custom_view.php?f=$1  [L]
-RewriteRule ^put(.*)          /sfb-check/custom_put.php$1      [L]
-RewriteRule ^delete(.*)       /sfb-check/custom_delete.php$1   [L]
+RewriteRule ^custom-(.*)      custom_view.php?f=$1  [L]
+RewriteRule ^put(.*)          custom_put.php$1      [L]
+RewriteRule ^delete(.*)       custom_delete.php$1   [L]
