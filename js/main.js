@@ -281,6 +281,7 @@ var Editor = {
 			<div><button id="mark-index-button" onclick="MarkViewer.showIndex()">Показалец на маркировките</button></div>\
 			<div id="edit-buttons">\
 				<button id="edit-button" onclick="Editor.toggleEditable()">Редактиране</button>\
+				<button id="save-button" onclick="Editor.saveToFile()">Запис</button>\
 				<button id="copy-button" onclick="Editor.copyToClipboard()" style="display:none">To clipboard</button>\
 			</div>\
 			<div id="current-mark-text"></div>\
@@ -363,6 +364,11 @@ var Editor = {
 	insertAtCaretEditable: function(text)
 	{
 		document.execCommand("insertHTML", false, text);
+	},
+
+	saveToFile: function()
+	{
+		location.href = "data:application/octet-stream;base64," + Base64.encode($("#output").text());
 	},
 
 	clear: function()
