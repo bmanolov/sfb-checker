@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v6
+# v7
 index.html
 css/main.css
 css/images/delete.png
@@ -17,3 +17,4 @@ js/main.js
 js/replacer.js
 js/replace_worker.js
 js/sfb_master.js
+js/webtoolkit.base64.js
