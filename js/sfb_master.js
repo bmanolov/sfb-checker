@@ -461,11 +461,14 @@ var SfbMaster =
 
 	compressSpaces: function(s)
 	{
-		return Replacer.replaceWithSkip(s, {
+		s = s.replace(/\n\t\n/g, "\n\n");
+		s = Replacer.replaceWithSkip(s, {
 			search:  /  +/g,
 			replace: " ",
 			skip:    this.re([this.mre("F"), this.ore("F")])
 		});
+
+		return s;
 	},
 
 
