@@ -256,16 +256,48 @@ var Editor = {
 	},
 	setInput: function(input)
 	{
+		this.saveInput(input);
 		return $("#input").val(input);
 	},
+	saveInput: function(input)
+	{
+		localStorage.input = input;
+	},
+	setInputIfSaved: function()
+	{
+		var input = localStorage.input;
+		if (input) {
+			this.setInput(input);
+		}
+	},
+	clearInput: function()
+	{
+		this.setInput("");
+		localStorage.removeItem("input");
+		return this;
+	},
+
 	getIncorrectForms: function()
 	{
 		return $("#incorrect").val().replace(/\s*,\s*/g, ",").split(",");
+	},
+	getOutput: function()
+	{
+		// <br>s get stripped by text() below, so turn them into new lines
+		$("#output").html($("#output").html().replace(/<br>/g, "\n"));
+
+		return $("#output").text();
 	},
 	setOutput: function(output)
 	{
 		this.initOutputBox();
 		$("#output").html(output);
+	},
+
+	init: function()
+	{
+		this.setInputIfSaved();
+		this.initDropBox();
 	},
 
 	initOutputBox: function()
@@ -281,12 +313,21 @@ var Editor = {
 			<div><button id="mark-index-button" onclick="MarkViewer.showIndex()">Показалец на маркировките</button></div>\
 			<div id="edit-buttons">\
 				<button id="edit-button" onclick="Editor.toggleEditable()">Редактиране</button>\
-				<button id="save-button" onclick="Editor.saveToFile()">Запис</button>\
+				<button id="save-button" onclick="Editor.saveOutput()">Запис</button>\
+				<button id="save-button" onclick="Editor.saveToFile()">Запис във файл</button>\
 				<button id="copy-button" onclick="Editor.copyToClipboard()" style="display:none">To clipboard</button>\
 			</div>\
 			<div id="current-mark-text"></div>\
 			<pre id="output"></pre></div>');
+		} else {
+			$("#output-box").show();
 		}
+	},
+
+	hideOutputBox: function()
+	{
+		$("#output-box").hide();
+		return this;
 	},
 
 	initDropBox: function()
@@ -366,14 +407,26 @@ var Editor = {
 		document.execCommand("insertHTML", false, text);
 	},
 
+	saveOutput: function()
+	{
+		this.setInput(this.getOutput());
+	},
+
 	saveToFile: function()
 	{
-		location.href = "data:application/octet-stream;base64," + Base64.encode($("#output").text());
+		location.href = "data:application/octet-stream;base64," + Base64.encode(this.getOutput());
+	},
+
+	clearOutput: function()
+	{
+		$("#output").empty();
+		this.hideOutputBox();
+		return this;
 	},
 
 	clear: function()
 	{
-		$("#output").empty();
+		this.clearInput().clearOutput();
 	},
 
 	replace: function(type, button)
@@ -412,7 +465,7 @@ var RemoteFile = {
 		ButtonHandler.setWorking(button, true);
 		var handler = this;
 		$.post("put", {f: file, c: contents}, function(sfile){
-			localStorage.setItem(sfile, new Date());
+			this.storeFile(sfile, new Date());
 			handler.append(sfile);
 			ButtonHandler.setWorking(button, false);
 		});
@@ -437,14 +490,14 @@ var RemoteFile = {
 	{
 		ButtonHandler.setWorking(button, true);
 		$.post("delete", {f: file}, function(data){
-			localStorage.removeItem(file);
+			this.unstoreFile(file);
 			$(button).parents("li").remove();
 		});
 	},
 
 	showListIfAny: function()
 	{
-		if (this.hasFiles()) {
+		if (this.hasStoredFiles()) {
 			this.showList();
 		}
 	},
@@ -477,16 +530,11 @@ var RemoteFile = {
 	getList: function()
 	{
 		var list = [];
-		for (var i = 0, l = localStorage.length; i < l; i++) {
-			list.push(localStorage.key(i));
+		for (var i in this.getStoredFiles()) {
+			list.push(i);
 		}
 
 		return list;
-	},
-
-	hasFiles: function()
-	{
-		return localStorage.length > 0;
 	},
 
 	checkOnline: function()
@@ -497,7 +545,40 @@ var RemoteFile = {
 
 		alert("Няма връзка към Мрежата.");
 		return false;
+	},
+
+	_storeKey: "_storedFiles",
+
+	storeFile: function(file, content)
+	{
+		var files = this.getStoredFiles;
+		files[file] = content;
+		localStorage.setObject(this._storeKey, files);
+	},
+
+	unstoreFile: function(file)
+	{
+		var files = this.getStoredFiles;
+		delete(files[file]);
+		localStorage.setObject(this._storeKey, files);
+	},
+
+	getStoredFiles: function(file, content)
+	{
+		var files = localStorage.getObject(this._storeKey);
+		if (files === null) {
+			files = {};
+			localStorage.setObject(this._storeKey, files);
+		}
+
+		return files;
+	},
+
+	hasStoredFiles: function()
+	{
+		return this.getStoredFiles() == {};
 	}
+
 };
 
 
@@ -510,7 +591,7 @@ function hilite()
 	worker.onmessage = function(e){
 		var output = e.data;
 		//output = output.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-		Editor.clear();
+		Editor.clearOutput();
 		MarkViewer.clear();
 		Editor.setOutput(output);
 		ButtonHandler.disablePrev();
@@ -568,11 +649,20 @@ function scrollTo(elm)
 	}
 }
 
+
+Storage.prototype.setObject = function(key, value) {
+	this.setItem(key, JSON.stringify(value));
+};
+
+Storage.prototype.getObject = function(key) {
+	return JSON.parse(this.getItem(key));
+};
+
 $(function(){
 	$(document).bind('keydown', 'alt+x', hilite);
 	//window.onhashchange = scrollTo;
 	KeyHandler.bindArrows();
-	Editor.initDropBox();
+	Editor.init();
 	RemoteFile.showListIfAny();
 
 	var $input = $("#input");

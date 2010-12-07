@@ -180,6 +180,8 @@ var SfbMaster =
 
 		s = this.format(s);
 
+		s = s.replace(/^\n+/, "");
+
 		return s;
 	},
 

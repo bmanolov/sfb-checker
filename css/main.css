@@ -177,6 +177,9 @@ button.delete span {
 #file-input {
 	float: right;
 }
+#input-extra-actions {
+	float: left;
+}
 form.working {
 	background: white url(images/indicator.gif) left center no-repeat;
 	padding-left: 2em;
