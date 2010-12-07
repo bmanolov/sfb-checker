@@ -465,7 +465,7 @@ var RemoteFile = {
 		ButtonHandler.setWorking(button, true);
 		var handler = this;
 		$.post("put", {f: file, c: contents}, function(sfile){
-			this.storeFile(sfile, new Date());
+			handler.storeFile(sfile, new Date());
 			handler.append(sfile);
 			ButtonHandler.setWorking(button, false);
 		});
@@ -489,8 +489,9 @@ var RemoteFile = {
 	remove: function(button, file)
 	{
 		ButtonHandler.setWorking(button, true);
+		var handler = this;
 		$.post("delete", {f: file}, function(data){
-			this.unstoreFile(file);
+			handler.unstoreFile(file);
 			$(button).parents("li").remove();
 		});
 	},
@@ -551,14 +552,14 @@ var RemoteFile = {
 
 	storeFile: function(file, content)
 	{
-		var files = this.getStoredFiles;
+		var files = this.getStoredFiles();
 		files[file] = content;
 		localStorage.setObject(this._storeKey, files);
 	},
 
 	unstoreFile: function(file)
 	{
-		var files = this.getStoredFiles;
+		var files = this.getStoredFiles();
 		delete(files[file]);
 		localStorage.setObject(this._storeKey, files);
 	},
@@ -576,7 +577,7 @@ var RemoteFile = {
 
 	hasStoredFiles: function()
 	{
-		return this.getStoredFiles() == {};
+		return this.getStoredFiles() != {};
 	}
 
 };
@@ -655,7 +656,7 @@ Storage.prototype.setObject = function(key, value) {
 };
 
 Storage.prototype.getObject = function(key) {
-	return JSON.parse(this.getItem(key));
+	return this.getItem(key) && JSON.parse(this.getItem(key));
 };
 
 $(function(){
