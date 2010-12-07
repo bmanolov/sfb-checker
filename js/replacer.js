@@ -26,13 +26,13 @@ var Replacer = {
 
 	quoteOpens: function(prevChar, nextChar, inQuote)
 	{
-		return prevChar == undefined || /[\s_({\[«]/.test(prevChar);
+		return prevChar == undefined || /[\s_({}\[«]/.test(prevChar);
 	},
 
 	quoteCloses: function(prevChar, nextChar, inQuote)
 	{
 		return nextChar == undefined
-			|| /[\s,;:.!?…_)}\]"*]/.test(nextChar)
+			|| /[\s,;:.!?…_){}\]"*]/.test(nextChar)
 			|| (nextChar == "-" && /[а-я]/i.test(prevChar));
 	},
 
