@@ -457,11 +457,12 @@ var RemoteFile = {
 		if ( ! this.checkOnline()) {
 			return;
 		}
-		var file = $("#localfile").val() || "untitled-"+(new Date().getTime())+".sfb";
+		var file = $("#localfile").val() || "untitled.sfb";
 		file = prompt("Име на файла:", file);
 		if (file === null) {
 			return;
 		}
+		file += "." + (new Date().getTime().toString(16));
 		ButtonHandler.setWorking(button, true);
 		var handler = this;
 		$.post("put", {f: file, c: contents}, function(sfile){
