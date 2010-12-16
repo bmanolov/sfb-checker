@@ -4,6 +4,9 @@ var Replacer = {
 		return s.replace(/[«»„“”]/g, '"');
 	},
 
+	openingQuote: "„",
+	closingQuote: "“",
+
 	replaceQuotes: function(s)
 	{
 		var pos = -1, quotesOpen = 0, quote = "";
@@ -11,10 +14,10 @@ var Replacer = {
 		while ( (pos = s.indexOf('"', pos+1)) >= 0 ) {
 			if ( this.quoteOpens(s[pos-1], s[pos+1], quotesOpen) ) {
 				quotesOpen++;
-				quote = "«";
+				quote = this.openingQuote;
 			} else if ( this.quoteCloses(s[pos-1], s[pos+1], quotesOpen) ) {
 				quotesOpen--;
-				quote = "»";
+				quote = this.closingQuote;
 			} else {
 				quote = '"';
 			}
@@ -26,7 +29,7 @@ var Replacer = {
 
 	quoteOpens: function(prevChar, nextChar, inQuote)
 	{
-		return prevChar == undefined || /[\s_({}\[«]/.test(prevChar);
+		return prevChar == undefined || /[\s_({}\[„]/.test(prevChar);
 	},
 
 	quoteCloses: function(prevChar, nextChar, inQuote)
@@ -44,7 +47,7 @@ var Replacer = {
 		s = s.replace(/\b([\d,.]*)-([\d,.]+)\b/g, "$1–$2"); // ndash
 		s = s.replace(/\b(\d+) *[—-] *(\d+)\b/g, "$1–$2"); // ndash
 		s = s.replace(/\b([IXV]+)[—-]([IXV]+)\b/g, "$1–$2"); // ndash
-		s = s.replace(/([\s(«])[-–­](\s)/g, "$1—$2"); // mdash
+		s = s.replace(/([\s(«„])[-–­](\s)/g, "$1—$2"); // mdash
 
 		return s;
 	},
