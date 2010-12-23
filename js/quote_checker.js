@@ -47,7 +47,9 @@ var QuoteChecker =
 
 	_putMarkers: function(string)
 	{
-		var quotes = this._openingQuotes.concat(this._closingQuotes);
+		var quotes = this._openingQuotes.concat(this._closingQuotes).sort(function(a, b) {
+			return a - b;
+		});
 		var newString = "";
 		var offset = 0;
 		for (var i = 0, len = quotes.length; i < len; i++) {
