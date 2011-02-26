@@ -1,7 +1,7 @@
 header, footer, aside, nav, article {
 	display: block;
 }
-body {
+#content-wrapper {
 	background: white url(images/sgtpat1.png) no-repeat 98% top;
 }
 pre {
@@ -36,6 +36,7 @@ footer {
 	font-style: italic;
 }
 h1, h2, h3 {
+	line-height: 2em;
 	font-weight: normal;
 }
 input:focus, textarea:focus {
@@ -168,7 +169,7 @@ button.delete span {
 	font-size: 80%;
 	text-decoration: none;
 }
-.current {
+#output .current {
 	border-bottom: medium solid black;
 }
 #edit-buttons {
