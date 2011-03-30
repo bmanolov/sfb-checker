@@ -265,9 +265,11 @@ var Editor = {
 	},
 	setInputIfSaved: function()
 	{
-		var input = localStorage.input;
-		if (input) {
-			this.setInput(input);
+		if (this.getInput() == "") {
+			var input = localStorage.input;
+			if (input) {
+				this.setInput(input);
+			}
 		}
 	},
 	clearInput: function()
