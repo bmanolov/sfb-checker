@@ -295,7 +295,7 @@ var SfbMaster =
 		return Replacer.replaceWithSkip(s, {
 			search:  /([a-zA-Z]+)(?![>$\t])/g,
 			replace: "\x04$1\x05",
-			skip:    this.re("tag")
+			skip:    this.re([this._re["tag"], this.ore("M>")])
 		});
 		//return s.replace(/([^{:./a-z])([a-zA-Z]+)(?![>$\t])/g, '$1\x04$2\x05');
 	},
