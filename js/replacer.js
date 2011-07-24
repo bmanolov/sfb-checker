@@ -1,3 +1,4 @@
+
 var Replacer = {
 	simplifyQuotes: function(s)
 	{
@@ -44,7 +45,7 @@ var Replacer = {
 	{
 		s = this.deleteHyphens(s);
 		s = s.replace(/\u2015/g, "—"); // Horizontal bar
-		s = s.replace(/\b([\d,.]*)-([\d,.]+)\b/g, "$1–$2"); // ndash
+		s = s.replace(/\b([\d,. ]+)-([\d,.]+)\b/g, "$1–$2"); // ndash
 		s = s.replace(/\b(\d+) *[—-] *(\d+)\b/g, "$1–$2"); // ndash
 		s = s.replace(/\b([IXV]+)[—-]([IXV]+)\b/g, "$1–$2"); // ndash
 		s = s.replace(/([\s(«„])[-–­](\s)/g, "$1—$2"); // mdash
