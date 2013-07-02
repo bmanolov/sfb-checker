@@ -34,10 +34,15 @@
 						<dt><label for="input">SFB:</label></dt>
 						<dd>
 							<textarea id="input" class="input" tabindex="1"></textarea>
-							<form id="file-input" onsubmit="Editor.loadLocalFile(this.localfile.files); return false">
-								<input id="localfile" name="localfile" type="file" onchange="Editor.loadLocalFile(this.files)" tabindex="3">
+							<form id="file-input" onsubmit="Editor.loadLocalFile(this.localfile.files); $(this).next().show(); return false">
+								<input id="localfile" name="localfile" type="file" onchange="Editor.loadLocalFile(this.files); $(this).parent().next().show(); " tabindex="3">
 								<button type="submit">Зареждане</button>
 							</form>
+							<form id="file-input-hl" onsubmit="Editor.loadLocalFilehl(this.localfilehl.files); return false" style="text-align:left; display:none;">
+								<input id="localfilehl" name="localfilehl" type="file" onchange="Editor.loadLocalFilehl(this.files)" tabindex="4">
+								<button type="submit">Зареждане на бележки</button>
+							</form>
+							<br/>
 							<div id="input-extra-actions">
 								<button onclick="Editor.clear()">Изчистване</button>
 							</div>

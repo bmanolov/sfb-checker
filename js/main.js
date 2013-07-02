@@ -378,6 +378,70 @@ var Editor = {
 		reader.readAsText(files[0], "utf8");
 	},
 
+	loadLocalFilehl: function(files) {
+		var reader = new FileReader();
+		reader.onload = function(evt) {
+			var res = ('\n' + evt.target.result.replace(/\r/g,'')).split('=========='),
+				txt = $('#input').val(),
+				tmp = [],
+				title = $.trim(txt.split(/\|\t/)[2].split('\n')[0].replace('\r',''));
+			for(var i = 0, j = res.length; i < j; i++) {
+				res[i] = res[i].split('\n');
+				if(res[i][1].indexOf(title) == -1) {
+					continue;
+				}
+				res[i] = res[i][res[i].length - 2];
+				// само ако го има е текста - може да се махне
+				if(res[i].length) {
+					tmp.push(res[i]);
+				}
+			}
+			if(tmp.length) {
+				var v = $("#incorrect").val();
+				v += v.length ? ', ' : '';
+				v += tmp.join(', ');
+				$("#incorrect").val(v);
+			}
+
+			/*
+			$('#localfilehl').hide().next().hide().nextAll().show();
+			var cnt = false;
+			$('.hl_control').unbind('click').bind('click', function(e) {
+				var txt = $('#input').val(),
+					dir = e.target.id == 'hl_next' ? 1 : -1,
+					tmp = '',
+					pos = false;
+				while(true) {
+					if(cnt === false) {
+						cnt = dir ? 0 : res.length - 1;
+					}
+					else {
+						cnt += dir;
+					}
+					if(cnt >= res.length) {
+						cnt = 0;
+						if(!confirm('Започване отначало?')) { break; }
+					}
+					if(cnt < 0) {
+						cnt = res.length - 1;
+						if(!confirm('Започване отначало?')) { break; }
+					}
+					tmp = res[cnt];
+					if(!$.trim(tmp).length) {
+						continue;
+					}
+					pos = txt.indexOf(tmp);
+					if(pos !== -1) {
+						$.vakata.selection.elm_set('input', pos, pos + tmp.length);
+						break;
+					}
+				}
+			});
+			*/
+		};
+		reader.readAsText(files[0], "utf8");
+	},
+
 	TABKEY: 9,
 	disableTab: function(e)
 	{
